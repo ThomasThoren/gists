@@ -13,6 +13,9 @@ def main():
     for gist in os.listdir(gists_path):
         _path = os.path.join(gists_path, gist)
 
+        if not os.path.isdir(_path):
+            continue
+
         try:
             subprocess.run(['git', 'diff', '--exit-code'], cwd=_path, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             subprocess.run(['git', 'diff', '--cached', '--exit-code'], cwd=_path, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
